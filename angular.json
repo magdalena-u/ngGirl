@@ -120,6 +120,14 @@
           }
         }
       }
-    }},
-  "defaultProject": "ngGirl"
+    }
+  },
+  "defaultProject": "ngGirl",
+  "schematics": {
+    "@schematics/angular": {
+      "component": {
+        "inlineTemplate": true
+      }
+    }
+  }
 }
