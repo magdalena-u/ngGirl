@@ -1,27 +1,13 @@
-import { Component } from "@angular/core";
+import { Component } from '@angular/core';
 
 @Component({
-  selector: "app-root",
+  selector: 'app-root',
   template: `
-    <h1>Welcome to {{ title }}</h1>
-    <app-input-button-unit></app-input-button-unit>
-
-    <ul>
-      <li *ngFor="let todoItem of todoList">
-        {{ todoItem.title }}
-      </li>
-    </ul>
+    <h1 class="app-title">Welcome to {{ title }}</h1>
+    <app-list-manager></app-list-manager>
   `,
-  styleUrls: ["./app.component.css"]
+  styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = "to-do-list";
-  todoList = [
-    { title: "install NodeJS" },
-    { title: "install Angular CLI" },
-    { title: "create new app" },
-    { title: "serve app" },
-    { title: "develop app" },
-    { title: "deploy app" }
-  ];
+  title = 'My to-to-app';
 }

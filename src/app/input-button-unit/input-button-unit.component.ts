@@ -1,25 +1,28 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { emit } from 'cluster';
 
 @Component({
-  selector: "app-input-button-unit",
+  selector: 'app-input-button-unit',
   template: `
-    <p>{{ title }}</p>
     <input
+      class="todo-input"
       #inputElementRef
-      [value]="title"
-      (keyup.enter)="changeTitle(inputElementRef)"
+      (keyup.enter)="submitValue($event.target.value)"
     />
-    <button (click)="changeTitle(inputElementRef)">save</button>
+    <button class="btn" (click)="submitValue(inputElementRef.value)">
+      save
+    </button>
   `,
-  styleUrls: ["./input-button-unit.component.css"]
+  styleUrls: ['./input-button-unit.component.css']
 })
 export class InputButtonUnitComponent implements OnInit {
-  title = "hello hello!";
+  @Output() submit: EventEmitter<string> = new EventEmitter();
+
   constructor() {}
 
   ngOnInit() {}
 
-  changeTitle(inputElementRef) {
-    this.title = inputElementRef.value;
+  submitValue(newTitle: string) {
+    this.submit.emit(newTitle);
   }
 }
