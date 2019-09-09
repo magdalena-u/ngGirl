@@ -10,7 +10,7 @@ import { TodoItem } from '../interfaces/todo-item';
       <span
         [ngClass]="{ 'todo-complete': item.completed }"
         [hidden]="editable"
-        (click)="correctItem()"
+        (dblclick)="correctItem()"
         #spanElementRef
         >{{ item.title }}</span
       >
@@ -19,6 +19,7 @@ import { TodoItem } from '../interfaces/todo-item';
         [hidden]="!editable"
         (cancel)="cancelCorrectItem()"
         (submit)="updateCorrectItem($event)"
+        [title]="item.title"
       ></app-todo-input>
 
       <button (click)="removeItem()">remove</button>
@@ -29,8 +30,8 @@ import { TodoItem } from '../interfaces/todo-item';
 export class TodoItemComponent implements OnInit {
   @Input() item: TodoItem;
   @Output() remove: EventEmitter<TodoItem> = new EventEmitter();
-  @Output() update: EventEmitter<any> = new EventEmitter();
-  @Output() correct: EventEmitter<any> = new EventEmitter();
+  @Output() update: EventEmitter<object> = new EventEmitter();
+  @Output() correct: EventEmitter<object> = new EventEmitter();
 
   constructor() {}
 
@@ -56,7 +57,6 @@ export class TodoItemComponent implements OnInit {
   cancelCorrectItem() {
     this.editable = false;
   }
-  // nasluchiwanie na sibling element
   updateCorrectItem(correctItem) {
     this.editable = false;
     this.correct.emit({ correctItem, item: this.item });

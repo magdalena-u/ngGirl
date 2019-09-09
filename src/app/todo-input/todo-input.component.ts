@@ -1,9 +1,10 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 
 @Component({
   selector: 'app-todo-input',
   template: `
     <input
+      [value]="title"
       (keyup.esc)="cancelCorrectItem()"
       (keyup.enter)="updateCorrectItem($event.target.value)"
     />
@@ -12,7 +13,8 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 })
 export class TodoInputComponent implements OnInit {
   @Output() cancel: EventEmitter<any> = new EventEmitter();
-  @Output() submit: EventEmitter<any> = new EventEmitter();
+  @Output() submit: EventEmitter<string> = new EventEmitter();
+  @Input() title: string;
 
   constructor() {}
 
