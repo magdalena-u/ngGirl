@@ -14,6 +14,7 @@ import { TodoListService } from '../services/todo-list.service';
             [item]="todoItem"
             (remove)="removeItem($event)"
             (update)="updateItem($event.item, $event.changes)"
+            (correct)="updateCorrectItem($event.correctItem, $event.item)"
           ></app-todo-item>
         </li>
       </ul>
@@ -39,5 +40,9 @@ export class ListManagerComponent implements OnInit {
 
   updateItem(item, changes) {
     this.todoListService.updateItem(item, changes);
+  }
+
+  updateCorrectItem(correctItem, item) {
+    this.todoListService.updateCorrectItem(correctItem, item);
   }
 }

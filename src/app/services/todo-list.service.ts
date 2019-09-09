@@ -47,4 +47,10 @@ export class TodoListService {
     this.todoList.splice(index, 1);
     this.saveData();
   }
+
+  updateCorrectItem(correctItem, item) {
+    const index = this.todoList.indexOf(item);
+    this.todoList[index].title = correctItem;
+    this.saveData();
+  }
 }

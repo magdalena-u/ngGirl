@@ -6,9 +6,21 @@ import { TodoItem } from '../interfaces/todo-item';
   template: `
     <div class="todo-item">
       <input type="checkbox" class="todo-checkbox" (click)="completeItem()" />
-      <span [ngClass]="{ 'todo-complete': item.completed }">{{
-        item.title
-      }}</span>
+
+      <span
+        [ngClass]="{ 'todo-complete': item.completed }"
+        [hidden]="editable"
+        (click)="correctItem()"
+        #spanElementRef
+        >{{ item.title }}</span
+      >
+
+      <app-todo-input
+        [hidden]="!editable"
+        (cancel)="cancelCorrectItem()"
+        (submit)="updateCorrectItem($event)"
+      ></app-todo-input>
+
       <button (click)="removeItem()">remove</button>
     </div>
   `,
@@ -18,8 +30,11 @@ export class TodoItemComponent implements OnInit {
   @Input() item: TodoItem;
   @Output() remove: EventEmitter<TodoItem> = new EventEmitter();
   @Output() update: EventEmitter<any> = new EventEmitter();
+  @Output() correct: EventEmitter<any> = new EventEmitter();
 
   constructor() {}
+
+  private editable = false;
 
   ngOnInit() {}
 
@@ -32,5 +47,18 @@ export class TodoItemComponent implements OnInit {
       item: this.item,
       changes: { completed: !this.item.completed }
     });
+  }
+
+  correctItem() {
+    this.editable = true;
+  }
+
+  cancelCorrectItem() {
+    this.editable = false;
+  }
+  // nasluchiwanie na sibling element
+  updateCorrectItem(correctItem) {
+    this.editable = false;
+    this.correct.emit({ correctItem, item: this.item });
   }
 }
