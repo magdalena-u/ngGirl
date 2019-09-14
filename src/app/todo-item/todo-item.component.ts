@@ -1,11 +1,16 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { TodoItem } from '../interfaces/todo-item';
+import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
+import { TodoItem } from "../interfaces/todo-item";
 
 @Component({
-  selector: 'app-todo-item',
+  selector: "app-todo-item",
   template: `
     <div class="todo-item">
-      <input type="checkbox" class="todo-checkbox" (click)="completeItem()" />
+      <input
+        type="checkbox"
+        class="todo-checkbox"
+        (click)="completeItem()"
+        [checked]="item.completed"
+      />
 
       <span
         [ngClass]="{ 'todo-complete': item.completed }"
@@ -25,7 +30,7 @@ import { TodoItem } from '../interfaces/todo-item';
       <button (click)="removeItem()">remove</button>
     </div>
   `,
-  styleUrls: ['./todo-item.component.css']
+  styleUrls: ["./todo-item.component.css"]
 })
 export class TodoItemComponent implements OnInit {
   @Input() item: TodoItem;
@@ -46,7 +51,7 @@ export class TodoItemComponent implements OnInit {
   completeItem() {
     this.update.emit({
       item: this.item,
-      changes: { completed: !this.item.completed }
+      changes: !this.item.completed
     });
   }
 
@@ -57,6 +62,7 @@ export class TodoItemComponent implements OnInit {
   cancelCorrectItem() {
     this.editable = false;
   }
+
   updateCorrectItem(correctItem) {
     this.editable = false;
     this.correct.emit({ correctItem, item: this.item });

@@ -1,7 +1,7 @@
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from "@angular/core";
 
 @Component({
-  selector: 'app-todo-input',
+  selector: "app-todo-input",
   template: `
     <input
       [value]="title"
@@ -9,7 +9,7 @@ import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
       (keyup.enter)="updateCorrectItem($event.target.value)"
     />
   `,
-  styleUrls: ['./todo-input.component.css']
+  styleUrls: ["./todo-input.component.css"]
 })
 export class TodoInputComponent implements OnInit {
   @Output() cancel: EventEmitter<any> = new EventEmitter();

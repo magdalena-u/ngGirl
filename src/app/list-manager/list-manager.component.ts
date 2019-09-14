@@ -1,15 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-import { TodoItem } from '../interfaces/todo-item';
-import { TodoListService } from '../services/todo-list.service';
+import { Component, OnInit } from "@angular/core";
+import { TodoItem } from "../interfaces/todo-item";
+import { TodoListService } from "../services/todo-list.service";
+import { Observable } from "rxjs";
 
 @Component({
-  selector: 'app-list-manager',
+  selector: "app-list-manager",
   template: `
     <div class="todo-app">
       <app-input-button-unit (submit)="addItem($event)"></app-input-button-unit>
 
-      <ul>
-        <li *ngFor="let todoItem of todoList">
+      <ul *ngIf="todoList | async as todoItems">
+        <li *ngFor="let todoItem of todoItems">
           <app-todo-item
             [item]="todoItem"
             (remove)="removeItem($event)"
@@ -20,18 +21,20 @@ import { TodoListService } from '../services/todo-list.service';
       </ul>
     </div>
   `,
-  styleUrls: ['./list-manager.component.css']
+  styleUrls: ["./list-manager.component.css"]
 })
 export class ListManagerComponent implements OnInit {
   constructor(private todoListService: TodoListService) {}
 
-  todoList: TodoItem[];
+  todoList: Observable<TodoItem[]>;
+
   ngOnInit() {
+    this.todoListService.retrievelListFromDatabase();
     this.todoList = this.todoListService.getTodoList();
   }
 
-  addItem(item: string) {
-    this.todoListService.addItem(item);
+  addItem(title: string) {
+    this.todoListService.addItem({ title });
   }
 
   removeItem(item) {
@@ -42,7 +45,7 @@ export class ListManagerComponent implements OnInit {
     this.todoListService.updateItem(item, changes);
   }
 
-  updateCorrectItem(correctItem, item) {
-    this.todoListService.updateCorrectItem(correctItem, item);
+  updateCorrectItem(title, item) {
+    this.todoListService.updateCorrectItem({ title }, item);
   }
 }
