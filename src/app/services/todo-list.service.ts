@@ -21,6 +21,7 @@ const defaultTodoList = [
 export class TodoListService {
   todoList: TodoItem[];
   private todoListSubject: Subject<TodoItem[]> = new Subject<TodoItem[]>();
+  baseUrl = "http://localhost:3000/items";
 
   constructor(
     private storageService: StorageService,
@@ -35,7 +36,7 @@ export class TodoListService {
 
   addItem(item: TodoItem) {
     this.http
-      .post("http://localhost:3000/items", {
+      .post(this.baseUrl, {
         title: item.title,
         completed: item.completed || false
       })
@@ -44,7 +45,7 @@ export class TodoListService {
 
   retrievelListFromDatabase() {
     this.http
-      .get<TodoItem[]>("http://localhost:3000/items")
+      .get<TodoItem[]>(this.baseUrl)
       .subscribe(response => this.todoListSubject.next(response));
   }
 
@@ -54,7 +55,7 @@ export class TodoListService {
 
   updateItem(item: TodoItem, changes: boolean) {
     this.http
-      .put(`http://localhost:3000/items/${item._id}`, {
+      .put(`${this.baseUrl}/${item._id}`, {
         title: item.title,
         completed: changes
       })
@@ -63,13 +64,13 @@ export class TodoListService {
 
   deleteItem(item: TodoItem) {
     return this.http
-      .delete(`http://localhost:3000/items/${item._id}`)
+      .delete(`${this.baseUrl}/${item._id}`)
       .subscribe(() => this.retrievelListFromDatabase());
   }
 
   updateCorrectItem(correctItem, item) {
     return this.http
-      .put(`http://localhost:3000/items/${item._id}`, {
+      .put(`${this.baseUrl}/${item._id}`, {
         title: correctItem.title,
         completed: correctItem.completed || false
       })
