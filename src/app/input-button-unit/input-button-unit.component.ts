@@ -3,12 +3,19 @@ import { Component, OnInit, Output, EventEmitter } from "@angular/core";
 @Component({
   selector: "app-input-button-unit",
   template: `
-    <input
-      class="todo-input"
-      #inputElementRef
-      (keyup.enter)="submitValue($event.target.value)"
-    />
-    <button class="btn" (click)="submitValue(inputElementRef.value)">
+    <mat-form-field class="full-width">
+      <input
+        matInput
+        placeholder="new task"
+        #inputElementRef
+        (keyup.enter)="submitValue($event.target.value)"
+      />
+    </mat-form-field>
+    <button
+      color="primary"
+      mat-raised-button
+      (click)="submitValue(inputElementRef.value)"
+    >
       save
     </button>
   `,

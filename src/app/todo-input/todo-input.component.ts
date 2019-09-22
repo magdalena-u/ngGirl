@@ -3,11 +3,14 @@ import { Component, OnInit, Output, EventEmitter, Input } from "@angular/core";
 @Component({
   selector: "app-todo-input",
   template: `
-    <input
-      [value]="title"
-      (keyup.esc)="cancelCorrectItem()"
-      (keyup.enter)="updateCorrectItem($event.target.value)"
-    />
+    <mat-form-field>
+      <input
+        matInput
+        [value]="title"
+        (keyup.esc)="cancelCorrectItem()"
+        (keyup.enter)="updateCorrectItem($event.target.value)"
+      />
+    </mat-form-field>
   `,
   styleUrls: ["./todo-input.component.css"]
 })

@@ -5,13 +5,11 @@ import { TodoItem } from "../interfaces/todo-item";
   selector: "app-todo-item",
   template: `
     <div class="todo-item">
-      <input
-        type="checkbox"
+      <mat-checkbox
         class="todo-checkbox"
         (click)="completeItem()"
         [checked]="item.completed"
-      />
-
+      ></mat-checkbox>
       <span
         [ngClass]="{ 'todo-complete': item.completed }"
         [hidden]="editable"
@@ -27,7 +25,12 @@ import { TodoItem } from "../interfaces/todo-item";
         [title]="item.title"
       ></app-todo-input>
 
-      <button (click)="removeItem()">remove</button>
+      <mat-icon
+        svgIcon="trash"
+        aria-hidden="false"
+        aria-label="bin icon"
+        class="todo-icon"
+      ></mat-icon>
     </div>
   `,
   styleUrls: ["./todo-item.component.css"]
