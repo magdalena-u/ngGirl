@@ -10,7 +10,7 @@ import { ListManagerComponent } from "./list-manager/list-manager.component";
 import { TodoListService } from "./services/todo-list.service";
 import { TodoInputComponent } from "./todo-input/todo-input.component";
 import { MaterialModule } from "./material/material.module";
-import { TodoAddItemComponent } from './todo-add-item/todo-add-item.component';
+import { TodoAddItemComponent } from "./todo-add-item/todo-add-item.component";
 
 @NgModule({
   declarations: [

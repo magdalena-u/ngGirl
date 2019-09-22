@@ -30,6 +30,7 @@ import { TodoItem } from "../interfaces/todo-item";
         aria-hidden="false"
         aria-label="bin icon"
         class="todo-icon"
+        (click)="removeItem()"
       ></mat-icon>
     </div>
   `,

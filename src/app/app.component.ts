@@ -22,6 +22,12 @@ export class AppComponent {
           "../assets/trash-solid.svg"
         )
       );
+      this.matIconRegistry.addSvgIcon(
+        "plus",
+        this.domSanitizer.bypassSecurityTrustResourceUrl(
+          "../assets/plus-solid.svg"
+        )
+      );
     }
   }
   title = "To Do App";

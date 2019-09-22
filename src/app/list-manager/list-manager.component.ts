@@ -6,9 +6,7 @@ import { Observable } from "rxjs";
 @Component({
   selector: "app-list-manager",
   template: `
-    <div class="todo-app">
-      <app-input-button-unit (submit)="addItem($event)"></app-input-button-unit>
-
+    <form class="todo-app">
       <ul *ngIf="todoList | async as todoItems">
         <li *ngFor="let todoItem of todoItems">
           <app-todo-item
@@ -19,7 +17,15 @@ import { Observable } from "rxjs";
           ></app-todo-item>
         </li>
       </ul>
-    </div>
+      <app-todo-add-item
+        (click)="changeMode()"
+        [hidden]="newItemMode"
+      ></app-todo-add-item>
+      <app-input-button-unit
+        [hidden]="!newItemMode"
+        (submit)="addItem($event)"
+      ></app-input-button-unit>
+    </form>
   `,
   styleUrls: ["./list-manager.component.css"]
 })
@@ -28,6 +34,12 @@ export class ListManagerComponent implements OnInit {
 
   todoList: Observable<TodoItem[]>;
 
+  private newItemMode = false;
+
+  changeMode() {
+    this.newItemMode = !this.newItemMode;
+  }
+
   ngOnInit() {
     this.todoListService.retrievelListFromDatabase();
     this.todoList = this.todoListService.getTodoList();
@@ -35,6 +47,7 @@ export class ListManagerComponent implements OnInit {
 
   addItem(title: string) {
     this.todoListService.addItem({ title });
+    this.changeMode();
   }
 
   removeItem(item) {
