@@ -8,6 +8,7 @@ import { TodoItemComponent } from "./todo-item/todo-item.component";
 import { ListManagerComponent } from "./list-manager/list-manager.component";
 import { TodoListService } from "./services/todo-list.service";
 import { TodoInputComponent } from "./todo-input/todo-input.component";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,7 @@ import { TodoInputComponent } from "./todo-input/todo-input.component";
     ListManagerComponent,
     TodoInputComponent
   ],
-  imports: [BrowserModule, HttpClientModule],
+  imports: [BrowserModule, HttpClientModule, BrowserAnimationsModule],
   providers: [TodoListService],
   bootstrap: [AppComponent]
 })
