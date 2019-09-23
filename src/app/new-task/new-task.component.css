@@ -1,0 +1,35 @@
+.todo-flex {
+  display: flex;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.todo-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 1rem;
+  height: 1rem;
+  color: #b0bec5;
+}
+
+.todo-button {
+  position: relative;
+  margin-right: 2rem;
+  width: 2rem;
+  height: 2rem;
+}
+
+.todo-span {
+  color: #b0bec5;
+}
+
+.todo-button:hover {
+  background-color: #b0bec5;
+}
+
+.todo-button:hover .todo-icon,
+.todo-button:hover ~ .todo-span {
+  color: #c2185b;
+}

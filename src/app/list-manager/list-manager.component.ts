@@ -19,6 +19,7 @@ import { Observable } from "rxjs";
           ></app-todo-item>
         </li>
       </ul>
+      <app-new-task></app-new-task>
     </div>
   `,
   styleUrls: ["./list-manager.component.css"]
