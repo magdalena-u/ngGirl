@@ -27,7 +27,13 @@ import { TodoItem } from "../interfaces/todo-item";
         [title]="item.title"
       ></app-todo-input>
 
-      <button (click)="removeItem()">remove</button>
+      <button mat-icon-button color="primary" (click)="removeItem()">
+        <mat-icon
+          svgIcon="trash"
+          aria-hidden="false"
+          aria-label="trash"
+        ></mat-icon>
+      </button>
     </div>
   `,
   styleUrls: ["./todo-item.component.css"]

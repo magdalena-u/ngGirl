@@ -1,10 +1,14 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Output, EventEmitter } from "@angular/core";
 
 @Component({
   selector: "app-new-task",
   template: `
     <div class="todo-flex">
-      <button mat-icon-button class="todo-button">
+      <button
+        mat-icon-button
+        class="todo-button"
+        (click)="discardNewTask($event)"
+      >
         <mat-icon
           class="todo-icon"
           svgIcon="plus"
@@ -18,7 +22,12 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./new-task.component.css"]
 })
 export class NewTaskComponent implements OnInit {
+  @Output() discard: EventEmitter<any> = new EventEmitter();
   constructor() {}
 
   ngOnInit() {}
+
+  discardNewTask(event) {
+    this.discard.emit(event);
+  }
 }

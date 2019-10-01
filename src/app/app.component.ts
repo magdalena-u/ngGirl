@@ -19,6 +19,10 @@ export class AppComponent {
       "plus",
       this.domSanitizer.bypassSecurityTrustResourceUrl("../assets/plus.svg")
     );
+    this.matIconRegistry.addSvgIcon(
+      "trash",
+      this.domSanitizer.bypassSecurityTrustResourceUrl("../assets/trash.svg")
+    );
   }
   title = "My to-to-app";
 }

@@ -12,6 +12,7 @@ import { Component, OnInit, Output, EventEmitter } from "@angular/core";
           class="todo-input"
           #inputElementRef
           (keyup.enter)="submitValue($event.target.value)"
+          (keyup.esc)="discardNewTask($event)"
         />
       </mat-form-field>
 
@@ -28,6 +29,7 @@ import { Component, OnInit, Output, EventEmitter } from "@angular/core";
 })
 export class InputButtonUnitComponent implements OnInit {
   @Output() submit: EventEmitter<string> = new EventEmitter();
+  @Output() discard: EventEmitter<any> = new EventEmitter();
 
   constructor() {}
 
@@ -35,5 +37,9 @@ export class InputButtonUnitComponent implements OnInit {
 
   submitValue(newTitle: string) {
     this.submit.emit(newTitle);
+  }
+
+  discardNewTask(event) {
+    this.discard.emit(event);
   }
 }
